@@ -1,15 +1,13 @@
 const playerHpElement = document.getElementById('player-health');
 const playerTotalHp = 274;
 let playerHp = 274;
-const playerType = document.getElementById('player');
-console.log(playerType.className);
+const playerType = document.getElementById('player').className;
 
 
 const opponentHpElement = document.getElementById('opponent-health');
 const opponentTotalHp = 292;
 let opponentHp = 292;
-const opponentType = document.getElementById('opponent');
-console.log(opponentType.className);
+const opponentType = document.getElementById('opponent').className;
 
 
 const turnText = document.getElementById('text');
@@ -152,11 +150,14 @@ function playerAttack(attack) {
   } else {
     // the attack didn't missed, so we must update the opponents health
     let newOpponentHp;
-    if (attack.type === 'eletric'){// electric attacks cause greater damage to aquatic pokemons 
+    
+    
+    if (attack.type === 'electric' && opponentType === 'water'){// electric attacks cause greater damage to water pokemons 
       newOpponentHp = opponentHp - 1.1*(attack.power); // 10% greater damage
     } else {
       newOpponentHp = opponentHp - attack.power;
     }
+    
     updateOpponentHp(newOpponentHp);
     return true;
   }
