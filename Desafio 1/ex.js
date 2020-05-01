@@ -1,10 +1,16 @@
 const playerHpElement = document.getElementById('player-health');
 const playerTotalHp = 274;
 let playerHp = 274;
+const playerType = document.getElementById('player');
+console.log(playerType.className);
+
 
 const opponentHpElement = document.getElementById('opponent-health');
 const opponentTotalHp = 292;
 let opponentHp = 292;
+const opponentType = document.getElementById('opponent');
+console.log(opponentType.className);
+
 
 const turnText = document.getElementById('text');
 let isTurnHappening = false;
@@ -43,7 +49,7 @@ const playerAttacks = {
   }, 
   thunderBolt: {
     power: 80,
-    accuracy: 65;
+    accuracy: 65,
     name: 'thunder bolt',
     type: 'electric'
   }
