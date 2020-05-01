@@ -34,6 +34,19 @@ const playerAttacks = {
     name: 'Submission',
     type: 'fighting',
   }
+  ,
+  electroBall: {
+    power: 90,
+    accuracy: 60,
+    name: 'Electro Ball',
+    type: 'electric'
+  }, 
+  thunderBolt: {
+    power: 80,
+    accuracy: 65;
+    name: 'thunder bolt',
+    type: 'electric'
+  }
 }
 
 const opponentAttacks = {
@@ -60,6 +73,13 @@ const opponentAttacks = {
     accuracy: 80,
     name: 'Hydro Pump',
     type: 'water',
+  }
+  ,
+  waterPulse: {
+    power: 85,
+    accuracy: 65,
+    name: 'Water Pulse',
+    type: 'water'
   }
 }
 
@@ -125,7 +145,12 @@ function playerAttack(attack) {
     return false;
   } else {
     // the attack didn't missed, so we must update the opponents health
-    const newOpponentHp = opponentHp - attack.power;
+    let newOpponentHp;
+    if (attack.type === 'eletric'){// electric attacks cause greater damage to aquatic pokemons 
+      newOpponentHp = opponentHp - 1.1*(attack.power); // 10% greater damage
+    } else {
+      newOpponentHp = opponentHp - attack.power;
+    }
     updateOpponentHp(newOpponentHp);
     return true;
   }
@@ -215,4 +240,10 @@ document.getElementById('thunder-button').addEventListener('click', function() {
 });
 document.getElementById('submission-button').addEventListener('click', function() {
   turn(playerAttacks.submission);
+});
+document.getElementById('electro-ball-button').addEventListener('click', function() {
+  turn(playerAttacks.electroBall);
+});
+document.getElementById('thunder-bolt-button').addEventListener('click', function() {
+  turn(playerAttacks.thunderBolt);
 });
