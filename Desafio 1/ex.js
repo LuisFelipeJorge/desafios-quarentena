@@ -116,6 +116,19 @@ function updateOpponentHp(newHP) {
 function playerAttack(attack) {
   // 0: return false if attack misses
   // 1: otherwise update opponents health and return true
+  
+  const didAttackMissed = willAttackMiss(attack.accuracy);
+  // console.log(willAttackMiss(attack.accuracy));
+  
+  if (didAttackMissed === true) {
+    // the attack did missed
+    return false;
+  } else {
+    // the attack didn't missed, so we must update the opponents health
+    const newOpponentHp = opponentHp - attack.power;
+    updateOpponentHp(newOpponentHp);
+    return true;
+  }
 }
 
 
@@ -128,8 +141,17 @@ function playerAttack(attack) {
 // opponent attack function that receives the used attack
 function opponentAttack(attack) {
   // 0: return false if attack misses
-  
   // 1: otherwise update player health and return true
+  const didAttackMissed = willAttackMiss(attack.accuracy);
+  if (didAttackMissed === true) {
+    // situation 0
+    return false;
+  } else {
+    // situation 1 
+    const newPlayerHP = playerHp - attack.power;
+    updatePlayerHp(newPlayerHP);
+    return true;
+  }
 }
 
 function chooseOpponentAttack () {
