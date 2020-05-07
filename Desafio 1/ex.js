@@ -201,11 +201,15 @@ function turn(playerChosenAttack) {
   }
   isTurnHappening = true;
 
+  // variable that will tell us whether the opponent is paralyzed or not
+  // let standstill = 0; // 1 means false and 0 true 
+  // let count_turn = 0 ; // will count the number of turns that the opponent must be paralysed 
+
   const didPlayerHit = playerAttack(playerChosenAttack);
 
   // Update HTML text with the used attack
   turnText.innerText = 'Player used ' + playerChosenAttack.name;
-
+  
   // Update HTML text in case the attack misses
   if (!didPlayerHit) {
     turnText.innerText += ', but missed!';
@@ -213,17 +217,21 @@ function turn(playerChosenAttack) {
 
   // Wait 2000ms to execute opponent attack (Player attack animation time)
   setTimeout(() => {
-    // Randomly chooses opponents attack
-    const opponentChosenAttack = chooseOpponentAttack();
+    if (playerChosenAttack.name === "Thunder Shock") {
+      turnText.innerText = 'Opponent is paralysed';    
+    }else {
+      // Randomly chooses opponents attack
+      const opponentChosenAttack = chooseOpponentAttack();
 
-    const didOpponentHit = opponentAttack(opponentChosenAttack);
+      const didOpponentHit = opponentAttack(opponentChosenAttack);
 
-    // Update HTML text with the used attack
-    turnText.innerText = 'Opponent used ' + opponentChosenAttack.name;
+      // Update HTML text with the used attack
+      turnText.innerText = 'Opponent used ' + opponentChosenAttack.name;
 
-    // Update HTML text in case the attack misses
-    if (!didOpponentHit) {
-      turnText.innerText += ', but missed!';
+      // Update HTML text in case the attack misses
+      if (!didOpponentHit) {
+        turnText.innerText += ', but missed!';
+      }
     }
 
     // Wait 2000ms to end the turn (Opponent attack animation time)
