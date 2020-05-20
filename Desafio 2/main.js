@@ -55,6 +55,17 @@ class Cell {
   // (This function is called inside cellRightClick function that are in the Map class,
   // you dont need to worry with that)
   // *************************************************************************************
+
+	toggleFlag() {
+		if(this.isFlagged){
+		// there is already a flag here, so we must remove it
+			this.isFlagged = false
+			this.element.classList.remove('flag')
+		} else{
+			this.isFlagged = true
+			this.element.classList.add('flag')
+		}
+	}
 }
 
 class Map {
@@ -182,3 +193,4 @@ class Map {
 
 // Instantiate a Map object
 new Map(document.getElementById('root'), 50, 30, 300);
+
